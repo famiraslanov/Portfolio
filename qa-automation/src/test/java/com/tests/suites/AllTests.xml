@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="All" verbose="1">
+    <test name="api" parallel="classes" thread-count="5">
+        <packages>
+            <package name="com.tests.api.*"/>
+        </packages>
+    </test>
+
+    <test name="all-ui-platform" parallel="classes" thread-count="5">
+        <packages>
+            <package name="com.tests.ui.platform.*"/>
+        </packages>
+    </test>
+
+    <test name="all-ui-egr" parallel="classes" thread-count="5">
+        <packages>
+            <package name="com.tests.ui.egr.*"/>
+        </packages>
+    </test>
+
+    <test name="all-ui-safety-catchall" parallel="classes" thread-count="5">
+        <packages>
+            <package name="com.tests.ui.*">
+                <exclude name="com.tests.ui.athena.*" />
+                <exclude name="com.tests.ui.platform.*" />
+                <exclude name="com.tests.ui.egr.*" />
+                <exclude name="com.tests.ui.postrun.*" />
+            </package>
+        </packages>
+    </test>
+
+    <test name="performance" parallel="classes" thread-count="1">
+        <packages>
+            <package name="com.tests.performancetests.*"/>
+        </packages>
+    </test>
+
+    <test name="postRun" parallel="classes" thread-count="5">
+        <packages>
+            <package name="com.tests.ui.postrun.*"/>
+        </packages>
+    </test>
+</suite>

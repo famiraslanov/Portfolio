@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id "io.freefair.lombok" version "6.5.1"
+}
+
+group 'org.withintelligence'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.11.0'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-http-jdk-client', version: '4.8.1' // Needed for Chrome 111
+    testImplementation group: 'org.testng', name: 'testng', version: '7.6.1'
+    testImplementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.0-rc2'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.3'
+    implementation group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.12.128'
+
+    implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+
+    implementation group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '3.1.0-M8'
+    implementation group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '3.1.0-M8'
+    implementation group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '3.1.0-M8'
+    implementation group: 'org.jasypt', name: 'jasypt', version: '1.9.3'
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.14.0-rc3'
+    implementation group: 'org.json', name: 'json', version: '20220924'
+    implementation group: 'sc.tyro', name: 'ashot-screenshot-provider', version: '1.1.0' // Full height screenshots
+    implementation group: 'org.apache.poi', name: 'poi', version: '3.17'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.13.0'
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.4.0-b180830.0359'  // S3 client dependency
+
+    implementation group: 'com.microsoft.graph', name: 'microsoft-graph', version: '5.+'    // Email checking
+    implementation group: 'com.azure', name: 'azure-identity', version: '1.+'               // Email checking
+}
+
+test {
+    systemProperties = System.getProperties() as Map<String, ?>
+
+    def runSuite = project.hasProperty("suite")
+
+    testLogging {
+        dependsOn cleanTest
+        showStandardStreams = true
+    }
+
+    useTestNG {
+        useDefaultListeners = true
+        def dir = System.getProperty("testngReportOutput")
+        outputDirectory = dir ? file(dir) : file("$buildDir/testng-output")
+
+        if (runSuite) {
+            def suiteToRun = project.getProperty("suite")
+            suites "src/test/java/com/tests/suites/" + suiteToRun
+        } else {
+            parallel 'classes'
+            threadCount 5
+        }
+    }
+}
