@@ -1,0 +1,19 @@
+{
+  "name": "apitestingjsonplaceholder2",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/**/*.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^5.0.0",
+    "chai-sorted": "^0.2.0",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.4"
+  }
+}
