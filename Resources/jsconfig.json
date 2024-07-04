@@ -1,0 +1,4 @@
+﻿{
+ "MyDatabaseConnection": "Data Source=CMDB-218522\\SQLEXPRESS;Initial Catalog=unionReporting;Integrated Security=True;Encrypt=True;Trust Server Certificate=True"
+}
+

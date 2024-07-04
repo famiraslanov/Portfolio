@@ -1,0 +1,9 @@
+﻿{
+  "selectAllAuthors": "SELECT * FROM author;",
+  "selectTestsByAuthor": "SELECT * FROM test WHERE author_id = '{0}';",
+  "selectAuthorByEmail": "SELECT * FROM author WHERE email = '{0}';",
+  "selectAuthorById": "SELECT * FROM author WHERE id = '{0}';",
+  "insertNewAuthor": "INSERT INTO author (name, login, email) VALUES ('{0}', '{1}', '{2}');",
+  "updateAuthorById": "UPDATE author SET {0} = '{1}' WHERE id = '{2}';",
+  "deleteAuthorById": "DELETE FROM author WHERE id = '{0}';"
+}
